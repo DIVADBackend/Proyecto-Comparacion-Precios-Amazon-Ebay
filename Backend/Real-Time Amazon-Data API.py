@@ -1,5 +1,4 @@
 import requests
-import json
 
 url = "https://real-time-amazon-data.p.rapidapi.com/product-details"
 
