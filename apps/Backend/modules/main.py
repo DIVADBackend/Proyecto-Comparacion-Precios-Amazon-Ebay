@@ -1,13 +1,17 @@
-import ProductSearchEndpoint as PSE
-import ProductDetailsEndpoint as PDE
+from ProductSearchEndpoint import buscarProducto
+from ProductDetailsEndpoint import detallesProducto
+from db_queries import buscarCategoryID
+
 
 query = input("Nombre del producto: ")
-category = int(input("Categoría: "))
+category = input("Categoría: ")
+
+category_id = buscarCategoryID(category)
 
 
 #Buscando el producto en Amazon
 
-responseSearching = PSE.buscarProducto(query, category)
+responseSearching = buscarProducto(query, category_id)
 
 json_response_search = responseSearching.json()
 
@@ -21,11 +25,12 @@ asin = relevant_data['asin']
 
 #Obteniendo detalles del producto con su ASIN
 
-responseDetails = PDE.detallesProducto(asin)
+responseDetails = detallesProducto(asin)
 
 json_response_details = responseDetails.json()
 
-print(json_response_details['data']['product_price'])
+print(json_response_details['data'])
+print(category_id)
 
 
 
